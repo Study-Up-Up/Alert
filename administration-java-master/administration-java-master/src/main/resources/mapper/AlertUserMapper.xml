@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hzby.whc.mapperService.AlertUserMapper">
+  <resultMap id="BaseResultMap" type="cn.hzby.whc.entity.AlertUser">
+    <!--@mbg.generated-->
+    <!--@Table alert_user-->
+    <id column="alert_id" jdbcType="BIGINT" property="alertId" />
+    <result column="alert_username" jdbcType="VARCHAR" property="alertUsername" />
+    <result column="alert_password" jdbcType="VARCHAR" property="alertPassword" />
+    <result column="alert_insert" jdbcType="TIMESTAMP" property="alertInsert" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    alert_id, alert_username, alert_password, alert_insert
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from alert_user
+    where alert_id = #{alertId,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" keyColumn="alert_id" keyProperty="alertId" parameterType="cn.hzby.whc.entity.AlertUser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into alert_user (alert_username, alert_password, alert_insert
+      )
+    values (#{alertUsername,jdbcType=VARCHAR}, #{alertPassword,jdbcType=VARCHAR}, #{alertInsert,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="getUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from alert_user
+    where alert_username=#{username,jdbcType=VARCHAR} and alert_password=#{password,jdbcType=VARCHAR}
+  </select>
+</mapper>

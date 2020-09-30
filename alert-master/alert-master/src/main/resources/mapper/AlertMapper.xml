@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hzby.whc.mapperService.AlertMapper">
+  <resultMap id="BaseResultMap" type="cn.hzby.whc.entity.Alert">
+    <!--@mbg.generated-->
+    <!--@Table alert-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="leftexpression" jdbcType="VARCHAR" property="leftexpression" />
+    <result column="midexpression" jdbcType="VARCHAR" property="midexpression" />
+    <result column="rightexpression" jdbcType="VARCHAR" property="rightexpression" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, title, leftexpression, midexpression, rightexpression, note, `time`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from alert
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.hzby.whc.entity.Alert" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into alert (title, leftexpression, midexpression, 
+      rightexpression, note, `time`
+      )
+    values (#{title,jdbcType=VARCHAR}, #{leftexpression,jdbcType=VARCHAR}, #{midexpression,jdbcType=VARCHAR}, 
+      #{rightexpression,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      );
+    <selectKey resultType="java.lang.Long" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+  </insert>
+  <select id="selectAllRules" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from alert
+  </select>
+</mapper>

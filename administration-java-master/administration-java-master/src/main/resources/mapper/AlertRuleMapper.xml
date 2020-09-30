@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hzby.whc.mapperService.AlertRuleMapper">
+  <resultMap id="BaseResultMap" type="cn.hzby.whc.entity.AlertRule">
+    <!--@mbg.generated-->
+    <!--@Table alert_rule-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="alert_rule_id" jdbcType="VARCHAR" property="alertRuleId" />
+    <result column="alert_machines" jdbcType="VARCHAR" property="alertMachines" />
+    <result column="alert_rule_note" jdbcType="VARCHAR" property="alertRuleNote" />
+    <result column="alert_rule_time" jdbcType="TIMESTAMP" property="alertRuleTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, alert_rule_id, alert_machines, alert_rule_note, alert_rule_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from alert_rule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from alert_rule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.hzby.whc.entity.AlertRule" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into alert_rule (alert_rule_id, alert_machines, alert_rule_note, 
+      alert_rule_time)
+    values (#{alertRuleId,jdbcType=VARCHAR}, #{alertMachines,jdbcType=VARCHAR}, #{alertRuleNote,jdbcType=VARCHAR}, 
+      #{alertRuleTime,jdbcType=TIMESTAMP});
+    <selectKey resultType="java.lang.Long" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.hzby.whc.entity.AlertRule">
+    <!--@mbg.generated-->
+    update alert_rule
+    set alert_rule_id = #{alertRuleId,jdbcType=VARCHAR},
+      alert_machines = #{alertMachines,jdbcType=VARCHAR},
+      alert_rule_note = #{alertRuleNote,jdbcType=VARCHAR},
+      alert_rule_time = #{alertRuleTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectRuleCombination" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from alert_rule
+    order by id desc
+  </select>
+</mapper>
